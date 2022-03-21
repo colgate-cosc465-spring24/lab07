@@ -30,7 +30,7 @@ Your task is to complete the following functions:
 
 You may add additional helper functions as desired.
 
-Each `AutonomousSystem` will need to advertise its own prefix as well as any prefixes it learns from its customers/providers/peers that should be advertised to its other customers/providers/peers. **Your `send_advertisement` function should directly call the `recv_advertisement` function of the `AutonomousSystem` instance to whom the advertisement is being sent.** A shorter path is preferred to a longer path; if two paths have equal length, then the AS may prefer either path.
+Each `AutonomousSystem` will need to advertise its own prefix as well as any prefixes it learns from its customers/providers/peers that should be advertised to its other customers/providers/peers. Consult Section III.A of the paper *On Inferring Autonomous System Relationships in the Internet* to refresh your memory of the rules for advertising prefixes. **Your `send_advertisement` function should directly call the `recv_advertisement` function of the `AutonomousSystem` instance to whom the advertisement is being sent.** A shorter path is preferred to a longer path; if two paths have equal length, then the AS may prefer either path.
 
 I recommend you propagate advertisements for one prefix at a time; after all advertisements have been propagated for one prefix (and each AS has determined its best path to that prefix), then you can propagate advertisements for the next prefix. 
 
