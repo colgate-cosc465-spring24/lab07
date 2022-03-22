@@ -38,11 +38,11 @@ class AutonomousSystem:
         """Add a peer AS"""
         self._peers.append(peer)
 
-    def send_advertisement(self, path):
+    def send_advertisement(self, ad):
         """Send an advertisement to all relevant neighbors"""
         # TODO
 
-    def recv_advertisement(self, path):
+    def recv_advertisement(self, ad):
         """Receive an advertisement from a neighbor"""
         # TODO
 
@@ -62,19 +62,20 @@ class Advertisement:
     def prefix(self):
         return self._prefix
 
-    def prepend(self, AS):
+    def add_to_path(self, AS):
         """Add an AS to the path"""
         self._path.insert(0, AS)
 
-    def length(self):
+    @property
+    def path_length(self):
         """Get the length of the path"""
         return len(self._path)
 
-    def contains(self, AS):
+    def path_contains(self, AS):
         """Checks if AS already exists in the path"""
         return AS in self._path
 
-    def head(self):
+    def path_head(self):
         """Gets the nexthop AS"""
         if len(self._path) > 0:
             return self._path[0]
