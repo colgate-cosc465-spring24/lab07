@@ -132,8 +132,8 @@ def compute_paths(ASes):
 def main():
     # Parse arguments
     arg_parser = ArgumentParser(description='Internet routing simulator')
-    arg_parser.add_argument('-t', '--topology', action='store',
-            required=True, help='JSON file containing topology')
+    arg_parser.add_argument('topology', action='store',
+            help='JSON file containing topology')
     settings = arg_parser.parse_args()
 
     # Load topology

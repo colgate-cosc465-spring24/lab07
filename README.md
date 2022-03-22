@@ -37,7 +37,7 @@ I recommend you propagate advertisements for one prefix at a time; after all adv
 ## Testing the simulator
 You can use the provided topologies (`linear.json`, `example.json` and `warm-up.json`) to test your simulator. You can run the simulator as follows:
 ```bash
-./simulator.py -t topologies/TOPOLOGY_FILE
+./simulator.py topologies/TOPOLOGY_FILE
 ```
 replacing `TOPOLOGY_FILE` with the name of one of the JSON files.
 
