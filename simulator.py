@@ -14,7 +14,7 @@ class AutonomousSystem:
         self._customers = []
         self._providers = []
         self._peers = []
-        self._paths = {self._prefix : Advertisement(self._prefix)}
+        self._routes = {self._prefix : Advertisement(self._prefix)}
 
     @property
     def number(self):
@@ -47,8 +47,8 @@ class AutonomousSystem:
         # TODO
 
     def __str__(self):
-        return ("AS %d (%s): cust=[%s]; prov=[%s]; peer=[%s]" % 
-                (self._number, self._prefix, 
+        return ("AS {} ({}): cust=[{}]; prov=[{}]; peer=[{}]".format( 
+                self._number, self._prefix, 
                 ','.join([str(AS.number) for AS in self._customers]),
                 ','.join([str(AS.number) for AS in self._providers]),
                 ','.join([str(AS.number) for AS in self._peers])))
@@ -87,7 +87,7 @@ class Advertisement:
         return Advertisement(self._prefix, self._path.copy())
 
     def __str__(self):
-        return ("%s: %s" % (self._prefix, 
+        return ("{}: {}".format(self._prefix, 
                 " -> ".join([str(AS.number) for AS in self._path])))
 
 def load_topology(filepath):
@@ -117,14 +117,14 @@ def load_topology(filepath):
 
     return ASes 
 
-def compute_paths(ASes):
+def compute_routes(ASes):
     """Send/receive advertisements between ASes and compute the paths used by 
     each AS to reach various prefixes
     """
     # TODO
 
     # Dump paths
-    print("***** Paths *****")
+    print("***** Routes *****")
     for AS in ASes.values():
         print("AS %d" % AS.number)
         # TODO
@@ -143,7 +143,7 @@ def main():
         print(AS)
 
     # Compute paths
-    ASes = compute_paths(ASes)
+    ASes = compute_routes(ASes)
 
 if __name__ == '__main__':
     main()

@@ -20,13 +20,13 @@ The provided code (in `simulator.py`) contains:
 * `AutonomousSystem`: a class representing an AS, which keeps track of the AS’s number, prefix, customers, providers, and peers
 * `Advertisement`: a class representing a route advertisement, which consists of a prefix and a path (i.e., list) of ASes the advertisement has traversed
 * `load_topology`: a function that creates and relates `AutonomousSystem` objects based on topology information provided in a JSON file
-* `compute_paths`: a function that will be the main driver of the simulation
+* `compute_routes`: a function that will be the main driver of the simulation
 * `main`: a main function
 
 Your task is to complete the following functions:
 * `send_advertisement` (in the `AutonomousSystem` class)
 * `recv_advertisement` (in the `AutonomousSystem` class)
-* `compute_paths`
+* `compute_routes`
 
 You may add additional helper functions as desired.
 
@@ -47,7 +47,7 @@ For example, your simulator should produce the following output for `linear.json
 AS 1 (11.0.0.0/8): cust=[]; prov=[2]; peer=[]
 AS 2 (12.0.0.0/8): cust=[1,3]; prov=[]; peer=[]
 AS 3 (13.0.0.0/8): cust=[]; prov=[2]; peer=[]
-***** Paths *****
+***** Routes *****
 AS 1
         11.0.0.0/8: 
         12.0.0.0/8: 2
