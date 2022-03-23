@@ -26,6 +26,11 @@ class AutonomousSystem:
         """Get AS's own prefix"""
         return self._prefix
 
+    @property
+    def routes(self):
+        """"Get AS's table of routes"""
+        return self._routes
+
     def add_customer(self, customer):
         """Add a customer AS"""
         self._customers.append(customer)
@@ -38,12 +43,18 @@ class AutonomousSystem:
         """Add a peer AS"""
         self._peers.append(peer)
 
-    def send_advertisement(self, ad):
-        """Send an advertisement to all relevant neighbors"""
+    def originate_advertisement(self):
+        """Send an advertisement for the AS's own prefix"""
+        # TODO
+
+    def forward_advertisement(self, ad):
+        """Forward an advertisement to all relevant neighbors"""
+        ad = ad.copy() # Create a copy to avoid reference-related problems
         # TODO
 
     def recv_advertisement(self, ad):
         """Receive an advertisement from a neighbor"""
+        ad = ad.copy() # Create a copy to avoid reference-related problems 
         # TODO
 
     def __str__(self):
@@ -62,9 +73,13 @@ class Advertisement:
     def prefix(self):
         return self._prefix
 
-    def add_to_path(self, AS):
-        """Add an AS to the path"""
-        self._path.insert(0, AS)
+    @property
+    def path_head(self):
+        """Gets the nexthop AS"""
+        if len(self._path) > 0:
+            return self._path[0]
+        else:
+            return None
 
     @property
     def path_length(self):
@@ -75,12 +90,10 @@ class Advertisement:
         """Checks if AS already exists in the path"""
         return AS in self._path
 
-    def path_head(self):
-        """Gets the nexthop AS"""
-        if len(self._path) > 0:
-            return self._path[0]
-        else:
-            return None
+    
+    def add_to_path(self, AS):
+        """Add an AS to the path"""
+        self._path.insert(0, AS)
 
     def copy(self):
         """Creates a copy of this path"""
@@ -117,18 +130,6 @@ def load_topology(filepath):
 
     return ASes 
 
-def compute_routes(ASes):
-    """Send/receive advertisements between ASes and compute the paths used by 
-    each AS to reach various prefixes
-    """
-    # TODO
-
-    # Dump paths
-    print("***** Routes *****")
-    for AS in ASes.values():
-        print("AS %d" % AS.number)
-        # TODO
-
 def main():
     # Parse arguments
     arg_parser = ArgumentParser(description='Internet routing simulator')
@@ -142,8 +143,16 @@ def main():
     for AS in ASes.values():
         print(AS)
 
-    # Compute paths
-    ASes = compute_routes(ASes)
+    # Propagate routes
+    for AS in ASes.values():
+        AS.originate_advertisement()
+
+    # Display routes
+    print("***** Routes *****")
+    for AS in ASes.values():
+        print("AS %d" % AS.number)
+        for route in AS.routes.values():
+            print("\t{}".format(route))
 
 if __name__ == '__main__':
     main()

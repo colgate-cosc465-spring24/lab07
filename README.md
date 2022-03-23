@@ -20,19 +20,28 @@ The provided code (in `simulator.py`) contains:
 * `AutonomousSystem`: a class representing an AS, which keeps track of the AS’s number, prefix, customers, providers, and peers
 * `Advertisement`: a class representing a route advertisement, which consists of a prefix and a path (i.e., list) of ASes the advertisement has traversed
 * `load_topology`: a function that creates and relates `AutonomousSystem` objects based on topology information provided in a JSON file
-* `compute_routes`: a function that will be the main driver of the simulation
 * `main`: a main function
 
-Your task is to complete the following functions:
-* `send_advertisement` (in the `AutonomousSystem` class)
-* `recv_advertisement` (in the `AutonomousSystem` class)
-* `compute_routes`
+Your simulator will propagate advertisements for one prefix at a time; after all advertisements have been propagated for one prefix (and each AS has determined its best path to that prefix), then the simulator will propagate advertisements for the next prefix. 
 
-You may add additional helper functions as desired.
+Your task is to complete the following three functions in the `AutonomousSytem` system class:
 
-Each `AutonomousSystem` will need to advertise its own prefix as well as any prefixes it learns from its customers/providers/peers that should be advertised to its other customers/providers/peers. Consult Section III.A of the paper *On Inferring Autonomous System Relationships in the Internet* to refresh your memory of the rules for advertising prefixes. **Your `send_advertisement` function should directly call the `recv_advertisement` function of the `AutonomousSystem` instance to whom the advertisement is being sent.** A shorter path is preferred to a longer path; if two paths have equal length, then the AS may prefer either path.
+### `originate_advertisment`
+This function should advertise an AS's own prefix. Consult Section III.A of the paper *On Inferring Autonomous System Relationships in the Internet* to refresh your memory of the rules for advertising your own prefix. 
 
-I recommend you propagate advertisements for one prefix at a time; after all advertisements have been propagated for one prefix (and each AS has determined its best path to that prefix), then you can propagate advertisements for the next prefix. 
+### `forward_advertisement`
+
+This function should forward advertisements an AS learns from its neighbors. Consult Section III.A of the paper *On Inferring Autonomous System Relationships in the Internet* to refresh your memory of the rules for advertising prefixes learned from other ASes. 
+
+Your `forward_advertisement` function should directly call the `recv_advertisement` function of the AS(es) to which the advertisement is being forwarded to simulate the behavior of sending an advertisement on a network link.
+
+### `recv_advertisement`
+
+This function should process advertisements an AS receives from its neighbors. 
+
+A shorter path is preferred to a longer path. If two paths have equal length, then the AS may prefer either path.
+
+In some cases, advertisements received from neighbors need to be forwarded other neighbors, which should be handled by calling an AS's own `forward_advertisement` function from within the `recv_advertisement` function.
 
 ## Testing the simulator
 You can use the provided topologies (`linear.json`, `example.json` and `warm-up.json`) to test your simulator. You can run the simulator as follows:
