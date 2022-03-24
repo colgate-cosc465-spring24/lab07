@@ -90,13 +90,12 @@ class Advertisement:
         """Checks if AS already exists in the path"""
         return AS in self._path
 
-    
     def add_to_path(self, AS):
         """Add an AS to the path"""
         self._path.insert(0, AS)
 
     def copy(self):
-        """Creates a copy of this path"""
+        """Creates a copy of this advertisement"""
         return Advertisement(self._prefix, self._path.copy())
 
     def __str__(self):
@@ -151,8 +150,8 @@ def main():
     print("***** Routes *****")
     for AS in ASes.values():
         print("AS %d" % AS.number)
-        for route in AS.routes.values():
-            print("\t{}".format(route))
+        for prefix in sorted(AS.routes.keys()):
+            print("\t{}".format(AS.routes[prefix]))
 
 if __name__ == '__main__':
     main()
