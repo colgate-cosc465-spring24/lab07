@@ -1,8 +1,7 @@
-# Lab 06: Path vector routing simulator
+# Lab 07: Path vector routing simulator
 
 ## Overview
 In this lab, you’ll write a path vector routing simulator that computes which paths a small set of autonomous systems (ASes) learn based on the relationships between.
-
 
 ### Learning objectives
 After completing this lab, you should be able to:
@@ -10,8 +9,7 @@ After completing this lab, you should be able to:
 * Compute the path an AS uses to reach a destination
 
 ## Getting started
-
-Clone your git repository on the `tigers` servers. Your repository contains:
+Clone your git repository on a `tigers` server. Your repository contains:
 * `simulator.py`: a partially written Python program for simulating path vector routing
 * `topologies`: a directory with example network topologies
 
@@ -25,23 +23,9 @@ The provided code (in `simulator.py`) contains:
 Your simulator will propagate advertisements for one prefix at a time; after all advertisements have been propagated for one prefix (and each AS has determined its best path to that prefix), then the simulator will propagate advertisements for the next prefix. 
 
 Your task is to complete the following three functions in the `AutonomousSytem` system class:
-
-### `originate_advertisment`
-This function should advertise an AS's own prefix. Consult Section III.A of the paper *On Inferring Autonomous System Relationships in the Internet* to refresh your memory of the rules for advertising your own prefix. 
-
-### `forward_advertisement`
-
-This function should forward advertisements an AS learns from its neighbors. Consult Section III.A of the paper *On Inferring Autonomous System Relationships in the Internet* to refresh your memory of the rules for advertising prefixes learned from other ASes. 
-
-Your `forward_advertisement` function should directly call the `recv_advertisement` function of the AS(es) to which the advertisement is being forwarded to simulate the behavior of sending an advertisement on a network link.
-
-### `recv_advertisement`
-
-This function should process advertisements an AS receives from its neighbors. 
-
-A shorter path is preferred to a longer path. If two paths have equal length, then the AS may prefer either path.
-
-In some cases, advertisements received from neighbors need to be forwarded other neighbors, which should be handled by calling an AS's own `forward_advertisement` function from within the `recv_advertisement` function.
+* `originate_advertisment` – This function should advertise an AS's own prefix.
+* `forward_advertisement` – This function should forward advertisements an AS learns from its neighbors. Refer to the [class notes on AS relationships](https://docs.google.com/document/d/1x4N2hHApi_VbjaNdpJ5Ct5WJSPjptDwCYf1yRL5ZT-s/edit?usp=sharing) for the export polices that conform to valley-free routing. Your `forward_advertisement` function should directly call the `recv_advertisement` function of the AS(es) to which the advertisement is being forwarded to simulate the behavior of sending an advertisement on a network link.
+* `recv_advertisement` – This function should process advertisements an AS receives from its neighbors. A shorter path is preferred to a longer path; if two paths have equal length, then the AS may prefer either path. In some cases, advertisements received from neighbors need to be forwarded other neighbors, which should be handled by calling an AS's own `forward_advertisement` function from within the `recv_advertisement` function.
 
 ## Testing the simulator
 You can use the provided topologies (`linear.json`, `example.json` and `warm-up.json`) to test your simulator. You can run the simulator as follows:
@@ -83,5 +67,5 @@ The example topologies are shown below.
 #### warm-up.json
 ![](topologies/warm-up.png)
 
-## Submission instructions
-When you are done, you should commit and push your changes to `simulator.py` to GitHub.
+## Self-assessment
+The self-assessment for this lab will be available on Moodle on Friday, March 22nd. Please complete the self-assessment by 11pm on Monday, March 25th.
