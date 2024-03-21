@@ -22,7 +22,7 @@ The provided code (in `simulator.py`) contains:
 
 Your simulator will propagate advertisements for one prefix at a time; after all advertisements have been propagated for one prefix (and each AS has determined its best path to that prefix), then the simulator will propagate advertisements for the next prefix. 
 
-Your task is to complete the following three functions in the `AutonomousSytem` system class:
+Your task is to complete the following three functions in the `AutonomousSystem` system class:
 * `originate_advertisment` – This function should advertise an AS's own prefix.
 * `forward_advertisement` – This function should forward advertisements an AS learns from its neighbors. Refer to the [class notes on AS relationships](https://docs.google.com/document/d/1x4N2hHApi_VbjaNdpJ5Ct5WJSPjptDwCYf1yRL5ZT-s/edit?usp=sharing) for the export polices that conform to valley-free routing. Your `forward_advertisement` function should directly call the `recv_advertisement` function of the AS(es) to which the advertisement is being forwarded to simulate the behavior of sending an advertisement on a network link.
 * `recv_advertisement` – This function should process advertisements an AS receives from its neighbors. A shorter path is preferred to a longer path; if two paths have equal length, then the AS may prefer either path. In some cases, advertisements received from neighbors need to be forwarded other neighbors, which should be handled by calling an AS's own `forward_advertisement` function from within the `recv_advertisement` function.
